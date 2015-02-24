@@ -1,1 +1,27 @@
 <h1> Behold all the events this page has!</h1>
+
+<% if @events.size !=0 %>
+<table>
+	<tr>
+		<th>Title</th>
+		<th>Text</th>
+		<th>Startdate</th>
+		<th>Enddate</th>
+	</tr>
+
+	<% @events.each do |event| %>
+	<tr>
+		<td><%= event.title %></td>
+		<td><%= event.text %></td>
+		<td><%= event.begin %></td>
+		<td><%= event.einde %></td>
+	</tr>
+	<% end %>
+
+</table>
+
+<% else%>
+<p>
+	I'm sorry, there are no entries at the moment
+</p>
+<% end %> 

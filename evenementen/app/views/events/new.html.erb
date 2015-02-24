@@ -1,4 +1,4 @@
-<%= form_for :event do |f| %>
+<%= form_for @event do |f| %>
   <p>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -10,13 +10,13 @@
   </p>
   
     <p>
-    <%= f.label :start %><br>
-    <%= f.text_area :start %>
+    <%= f.label :begin %><br>
+    <%= f.text_area :begin %>
   </p>
   
   <p>
-    <%= f.label :end %><br>
-    <%= f.text_area :end %>
+    <%= f.label :einde %><br>
+    <%= f.text_area :einde %>
   </p>
  
   <p>
