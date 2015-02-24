@@ -1,3 +1,9 @@
+<h1><%= @person.name %>'s details</h1>
+
+<p>
+  <%= link_to 'Home', :root %> |  <%= link_to 'Back', people_path %>
+</p>
+
 <p>
   <strong>Name:</strong>
   <%= @person.name %>
@@ -13,5 +19,8 @@
   <%= @person.birthdate %>
 </p>
 
-<%= link_to 'Edit person', edit_person_path(@person) %> |
+<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Delete', person_path(@person),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %> |
 <%= link_to 'Back to people', people_path %>

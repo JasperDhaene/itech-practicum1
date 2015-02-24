@@ -1,9 +1,14 @@
 <h1> Event <%= @event.id %></h1>
+
+<p>
+  <%= link_to 'Home', :root %> |  <%= link_to 'Back', events_path %>
+</p>
+
 <p>
   <strong>Title:</strong>
   <%= @event.title %>
 </p>
- 
+
 <p>
   <strong>Text:</strong>
   <%= @event.text %>
@@ -19,4 +24,26 @@
   <%= @event.enddate %>
 </p>
 
-<p> <%= link_to 'Home', :root %> |  <%= link_to 'Back', events_path %></p>
+<hr>
+
+<h2>Messages</h2>
+
+<% @event.messages.each do |message| %>
+<p>
+  <strong><%= message.person.name %></strong> said the following on <strong><%= message.date %></strong>:
+  <p>
+    <em><%= message.text %></em>
+  </p>
+  <p>
+    <%= link_to 'Edit', edit_message_path(message) %> |
+    <%= link_to 'Delete', message_path(message),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %>
+  </p>
+  <hr>
+</p>
+<% end %>
+
+<p>
+  <%= render 'messages/embedded_form' %>
+</p>
