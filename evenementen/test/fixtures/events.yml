@@ -3,11 +3,15 @@
 one:
   title: MyString
   text: MyText
-  begin: 2015-02-24
-  einde: 2015-02-24
+  startdate: 2015-02-24 19:02:19
+  enddate: 2015-02-24 19:02:19
+  person_id: 
+  comment_id: 
 
 two:
   title: MyString
   text: MyText
-  begin: 2015-02-24
-  einde: 2015-02-24
+  startdate: 2015-02-24 19:02:19
+  enddate: 2015-02-24 19:02:19
+  person_id: 
+  comment_id: 
