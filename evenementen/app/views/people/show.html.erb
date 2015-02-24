@@ -1,0 +1,17 @@
+<p>
+  <strong>Name:</strong>
+  <%= @person.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @person.email %>
+</p>
+
+<p>
+  <strong>Date of birth:</strong>
+  <%= @person.birthdate %>
+</p>
+
+<%= link_to 'Edit person', edit_person_path(@person) %> |
+<%= link_to 'Back to people', people_path %>
