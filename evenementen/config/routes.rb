@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :people
   
-  resources :mongols
+  #resources :mongols
 
   root 'homepage#index'
   
