@@ -16,11 +16,14 @@
 
 <p>
   <strong>Date of birth:</strong>
-  <%= @person.birthdate %>
+  <%= @person.birthdate.strftime("%d %B %Y") %>
 </p>
 
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Delete', person_path(@person),
                     method: :delete,
-                    data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Back to people', people_path %>
+                    data: { confirm: 'Are you sure?' } %>
+
+<% if @person.messages.size != 0 %>
+<hr>
+<% end %>

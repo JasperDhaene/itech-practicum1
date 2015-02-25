@@ -4,4 +4,6 @@
   <%= link_to 'Home', :root %> |  <%= link_to 'Back', event_path(@event) %>
 </p>
 
-<%= render 'form' %>
+<%= form_for @message do |f| %>
+  <%= render :partial => 'messages/form', :locals => {:f => f} %>
+<% end %>

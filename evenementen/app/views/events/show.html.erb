@@ -16,20 +16,29 @@
 
 <p>
   <strong>Startdate:</strong>
-  <%= @event.startdate %>
+  <%= @event.startdate.strftime("%d %B %Y %H:%M") %>
 </p>
  
 <p>
   <strong>Enddate:</strong>
-  <%= @event.enddate %>
+  <%= @event.enddate.strftime("%d %B %Y %H:%M") %>
 </p>
 
 <hr>
 
 <h2>Messages</h2>
 
-<%= render 'messages/message' %>
+<% if @people.size != 0 %>
+  <%= render 'messages/messages' %>
 
-<p>
-  <%= render 'messages/embedded_form' %>
-</p>
+  <p>
+    <strong>Post a new message</strong>
+    <%= form_for([@event, @event.messages.build]) do |f| %>
+      <%= render :partial => 'messages/form', :locals => {:f => f} %>
+    <% end %>
+  </p>
+<% else %>
+  <p>
+    <em>Create a user to enable messages</em>
+  </p>
+<% end %>
