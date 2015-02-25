@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   end
   
   def create
-    @event = Event.new(params[:event].permit(:title, :text,:begin,:einde))
+    @event = Event.new(params[:event].permit(:title, :text,:startdate,:enddate))
     #@event = Event.new(event_params)
     if @event.save
       redirect_to @event
@@ -29,7 +29,7 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
 
-    if @event.update(params[:event].permit(:title, :text,:begin,:einde))
+    if @event.update(params[:event].permit(:title, :text,:startddate,:enddate))
       redirect_to @event
     else
       render 'edit'

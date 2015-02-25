@@ -18,7 +18,7 @@ class PeopleController < ApplicationController
   end
 
   def index
-    @persons = Person.all
+    @people = Person.all
   end
 
   def edit

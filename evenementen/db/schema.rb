@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224180219) do
+ActiveRecord::Schema.define(version: 20150225083720) do
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
     t.text     "text"
-    t.date     "startdate"
-    t.date     "enddate"
+    t.datetime "startdate"
+    t.datetime "enddate"
     t.integer  "person_id"
     t.integer  "message_id"
     t.datetime "created_at", null: false
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150224180219) do
   create_table "messages", force: :cascade do |t|
     t.integer  "person_id"
     t.text     "text"
-    t.date     "date"
+    t.datetime "date"
     t.integer  "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20150224180219) do
   create_table "people", force: :cascade do |t|
     t.text     "email"
     t.text     "name"
-    t.date     "birthdate"
+    t.datetime "birthdate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

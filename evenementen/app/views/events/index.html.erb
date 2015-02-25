@@ -1,26 +1,26 @@
 <h1>Behold all the events this page has!</h1>
 
 <p>
-  <%= link_to 'New event', new_event_path(@event)%> | <%= link_to 'Manage people', people_path %>
+  <%= link_to 'Home', :root %> | <%= link_to 'New event', new_event_path(@event)%>
 </p>
 
 
-<% if @events.size !=0 %>
+<% if @events.size != 0 %>
 <table>
   <tr>
     <th>Title</th>
-    <th>Text</th>
+    <th>Description</th>
     <th>Startdate</th>
     <th>Enddate</th>
-    <th colspan="2"></th>
+    <th colspan="2">Actions</th>
   </tr>
 
   <% @events.each do |event| %>
   <tr>
     <td><%= link_to event.title, event_path(event) %></td>
     <td><%= event.text %></td>
-    <td><%= event.startdate %></td>
-    <td><%= event.enddate %></td>
+    <td><%= event.startdate.strftime("%d %b %Y %H:%M") %></td>
+    <td><%= event.enddate.strftime("%d %b %Y %H:%M") %></td>
     <td> <%= link_to 'Edit', edit_event_path(event) %> </td>
     <td> <%= link_to 'Delete', event_path(event), method: :delete, data: { confirm: 'Are you sure?' } %> </td>
   </tr>

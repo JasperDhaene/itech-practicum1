@@ -1,20 +1,21 @@
-<p>
-  <strong>Author:</strong>
-  <%= message.person %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= message.date %>
-</p>
-
-<p>
-  <strong>Message:</strong>
-  <%= message.text %>
-</p>
-
-<p>
-  <%= link_to 'Destroy message', [message.post, message],
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
-</p>
+<% if @people.size != 0 %>
+  <% @event.messages.each do |message| %>
+  <p>
+    <strong><%= message.person.name %></strong> said the following on <strong><%= message.date %></strong>:
+    <p>
+      <em><%= message.text %></em>
+    </p>
+    <p>
+      <%= link_to 'Edit', edit_message_path(message) %> |
+      <%= link_to 'Delete', message_path(message),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+    </p>
+    <hr>
+  </p>
+  <% end %>
+<% else %>
+  <p>
+    <em>No messages yet</em>
+  </p>
+<% end %>

@@ -1,21 +1,38 @@
-<%= form_for([@event, @event.messages.build]) do |f| %>
-  <p>
-    <%= f.label :person %><br />
-    <%= f.select(:person_id) do %>
-      <% @people.each do |p| -%>
-        <%= content_tag(:option, p.name, value: p.id) %>
-      <% end %>
+<% if @people.size != 0 %>
+  <% if @person.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@person.errors.count, "error") %> prohibited
+      this person from being saved:</h2>
+    <ul>
+    <% @person.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
     <% end %>
-  </p>
+    </ul>
+  </div>
+  <% end %>
+  <%= form_for([@event, @event.messages.build]) do |f| %>
+    <p>
+      <%= f.label :person %><br />
+      <%= f.select(:person_id) do %>
+        <% @people.each do |p| -%>
+          <%= content_tag(:option, p.name, value: p.id) %>
+        <% end %>
+      <% end %>
+    </p>
+    <p>
+      <%= f.label :text %><br />
+      <%= f.text_area :text %>
+    </p>
+    <p>
+      <%= f.label :date %><br />
+      <%= f.datetime_select :date, start_year: 1900, end_year: 2015 %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %>
+<% else %>
   <p>
-    <%= f.label :text %><br />
-    <%= f.text_area :text %>
-  </p>
-  <p>
-    <%= f.label :date %><br />
-    <%= f.date_select :date, start_year: 1900, end_year: 2015 %>
-  </p>
-  <p>
-    <%= f.submit %>
+    <em>Create a user to enable messages</em>
   </p>
 <% end %>

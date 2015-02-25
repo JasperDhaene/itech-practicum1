@@ -1,27 +1,32 @@
 <h1>Listing persons</h1>
 
 <p>
-  <%= link_to 'Home', :root %> |  <%= link_to 'Back', events_path %> | <%= link_to 'New person', new_person_path %>
+  <%= link_to 'Home', :root %> | <%= link_to 'New person', new_person_path %>
 </p>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Date of birth</th>
-    <th></th>
-    <th></th>
-  </tr>
+<% if @people.size != 0 %>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Date of birth</th>
+      <th colspan="2">Actions</th>
+    </tr>
 
-<% @persons.each do |person| %>
-  <tr>
-    <td><%= link_to person.name, person_path(person) %></td>
-    <td><%= person.email %></td>
-    <td><%= person.birthdate %></td>
-    <td><%= link_to 'Edit', edit_person_path(person) %></td>
-    <td><%= link_to 'Delete', person_path(person),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+  <% @people.each do |person| %>
+    <tr>
+      <td><%= link_to person.name, person_path(person) %></td>
+      <td><%= person.email %></td>
+      <td><%= person.birthdate.strftime("%d %B %Y") %></td>
+      <td><%= link_to 'Edit', edit_person_path(person) %></td>
+      <td><%= link_to 'Delete', person_path(person),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  <p>
+    There are no entries at the moment.
+  </p>
 <% end %>
-</table>
