@@ -1,19 +1,28 @@
 <% if @event.messages.size != 0 %>
-  <% @event.messages.each do |message| %>
-  <p>
-    <strong><%= link_to message.person.name, person_path(Person.where(name: message.person.name).first.id) %></strong> said the following on <strong><%= message.date.strftime("%d %B %Y %H:%M") %></strong>
-    <p>
-      <em><%= message.text %></em>
-    </p>
-    <p>
-      <%= link_to 'Edit', edit_message_path(message) %> |
-      <%= link_to 'Delete', message_path(message),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %>
-    </p>
-    <hr>
-  </p>
-  <% end %>
+  <div class="row">
+    <% @event.messages.each do |message| %>
+    <div class="col-lg-7">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span>
+            <strong><%= link_to message.person.name, person_path(Person.where(name: message.person.name).first.id) %></strong> &mdash; <small><em><%= message.date.strftime("%d %B %Y %H:%M") %></em></small>
+          </span>
+          <span class="pull-right">
+            <%= link_to 'Edit', edit_message_path(message), :class => "btn btn-xs btn-default" %>
+            <%= link_to 'Delete', message_path(message),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' }, :class => "btn btn-xs btn-danger" %>
+          </span>
+        </div>
+        <div class="panel-body">
+          <p>
+            <%= message.text %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
 <% else %>
   <p>
     <em>No messages yet</em>

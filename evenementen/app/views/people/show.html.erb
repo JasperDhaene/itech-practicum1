@@ -1,8 +1,10 @@
 <h1><%= @person.name %>'s details</h1>
 
-<p>
-  <%= link_to 'Home', :root %> |  <%= link_to 'Back', people_path %>
-</p>
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', :root %></li>
+  <li><%= link_to 'People', people_path %></li>
+  <li class="active"><%= @person.name %></li>
+</ol>
 
 <p>
   <strong>Name:</strong>
@@ -19,16 +21,14 @@
   <%= @person.birthdate.strftime("%d %B %Y") %>
 </p>
 
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Delete', person_path(@person),
-                    method: :delete,
-                    data: { confirm: 'Are you sure?' } %>
-
 <% if @person.messages.size != 0 %>
 <hr>
-<% @person.messages.each do |m| %>
-  <p>
-    <strong><%= @person.name %></strong> posted a message on event <strong><%= link_to m.event.title, event_path(m.event) %></strong> on <%= m.date.strftime("%d %B %Y") %>
-  </p>
-<% end %>
+
+<ul class="list-group">
+  <% @person.messages.each do |m| %>
+    <li class="list-group-item">
+      <strong><%= @person.name %></strong> posted a message on event <strong><%= link_to m.event.title, event_path(m.event) %></strong> on <%= m.date.strftime("%d %B %Y") %>
+    </li>
+  <% end %>
+</ul>
 <% end %>

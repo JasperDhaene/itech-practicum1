@@ -1,7 +1,9 @@
 <h1>Edit Event</h1>
 
-<p>
-  <%= link_to 'Home', :root %> |  <%= link_to 'Back', events_path %>
-</p>
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', :root %></li>
+  <li><%= link_to 'Events', events_path %></li>
+  <li class="active">Edit event</li>
+</ol>
 
 <%= render 'form' %>

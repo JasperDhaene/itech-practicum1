@@ -1,7 +1,9 @@
 <h1>New person</h1>
 
-<p>
-  <%= link_to 'Home', :root %> |  <%= link_to 'Back', people_path %>
-</p>
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', :root %></li>
+  <li><%= link_to 'People', people_path %></li>
+  <li class="active">New person</li>
+</ol>
 
 <%= render 'form' %>

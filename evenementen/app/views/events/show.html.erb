@@ -1,8 +1,10 @@
-<h1> Event <%= @event.id %></h1>
+<h1><%= @event.title %></h1>
 
-<p>
-  <%= link_to 'Home', :root %> |  <%= link_to 'Back', events_path %>
-</p>
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', :root %></li>
+  <li><%= link_to 'Events', events_path %></li>
+  <li class="active"><%= @event.title %></li>
+</ol>
 
 <p>
   <strong>Title:</strong>

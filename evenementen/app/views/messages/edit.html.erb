@@ -1,8 +1,11 @@
 <h1>Edit person</h1>
 
-<p>
-  <%= link_to 'Home', :root %> |  <%= link_to 'Back', event_path(@event) %>
-</p>
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', :root %></li>
+  <li><%= link_to 'Events', event_path %></li>
+  <li><%= link_to @event.title, event_path(@event) %></li>
+  <li class="active">Message</li>
+</ol>
 
 <%= form_for @message do |f| %>
   <%= render :partial => 'messages/form', :locals => {:f => f} %>

@@ -1,5 +1,9 @@
 <h1>New event</h1>
 
-<%= render 'form' %>
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', :root %></li>
+  <li><%= link_to 'Events', events_path %></li>
+  <li class="active">New event</li>
+</ol>
 
-<%= link_to 'Back', events_path %>
+<%= render 'form' %>
