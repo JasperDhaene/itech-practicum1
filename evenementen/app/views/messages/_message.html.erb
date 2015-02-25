@@ -1,0 +1,20 @@
+<p>
+  <strong>Author:</strong>
+  <%= message.person %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= message.date %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= message.text %>
+</p>
+
+<p>
+  <%= link_to 'Destroy message', [message.post, message],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>

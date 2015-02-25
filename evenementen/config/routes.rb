@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :events
- 
+  resources :events do
+    resources :messages
+  end
+
   resources :messages
 
   resources :people

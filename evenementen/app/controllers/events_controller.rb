@@ -9,6 +9,7 @@ class EventsController < ApplicationController
   
   def show
     @event = Event.find(params[:id])
+    @people = Person.all
   end
   
   def create

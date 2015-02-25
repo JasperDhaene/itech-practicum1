@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
-  belongs_to :person
-  belongs_to :comment
+  has_many :messages, dependent: :destroy
+  validates :title, presence: true
+  validates :text, presence: true
 end
