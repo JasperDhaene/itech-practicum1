@@ -1,0 +1,2 @@
+module MongolsHelper
+end
