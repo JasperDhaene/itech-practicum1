@@ -22,6 +22,6 @@
   <% end %>
 <% else %>
   <p>
-    <em>Create a user to enable messages</em>
+    <em><%= link_to 'Create a user', new_person_path(@person)%> to enable messages</em>
   </p>
 <% end %>
