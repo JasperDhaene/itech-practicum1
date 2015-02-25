@@ -26,4 +26,9 @@
 
 <% if @person.messages.size != 0 %>
 <hr>
+<% @person.messages.each do |m| %>
+  <p>
+    <strong><%= @person.name %></strong> posted a message on event <strong><%= link_to m.event.title, event_path(m.event) %></strong> on <%= m.date.strftime("%d %B %Y") %>
+  </p>
+<% end %>
 <% end %>
