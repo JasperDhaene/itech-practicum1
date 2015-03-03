@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
+
   def index
-     @events = Event.all
   end
 
   def new
@@ -9,12 +9,11 @@ class EventsController < ApplicationController
   
   def show
     @event = Event.find(params[:id])
-    @people = Person.all
+    @message = Message.new
   end
   
   def create
-    @event = Event.new(params[:event].permit(:title, :text,:startdate,:enddate))
-    #@event = Event.new(event_params)
+    @event = Event.new(event_params)
     if @event.save
       redirect_to @event
     else
@@ -29,7 +28,7 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
 
-    if @event.update(params[:event].permit(:title, :text,:startddate,:enddate))
+    if @event.update(event_params)
       redirect_to @event
     else
       render 'edit'
@@ -45,6 +44,7 @@ class EventsController < ApplicationController
   
   private
   def event_params
-     params.require(:event).permit(:title,:text,:startdate,:enddate)
+     params.require(:event).permit(:title, :text, :startdate, :enddate)
   end
+
 end

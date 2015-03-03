@@ -1,4 +1,4 @@
-<% if @event.messages.size != 0 %>
+<% if @event.messages.any? %>
   <div class="row">
     <% @event.messages.each do |message| %>
     <div class="col-lg-7">
@@ -8,8 +8,8 @@
             <strong><%= link_to message.person.name, person_path(Person.where(name: message.person.name).first.id) %></strong> &mdash; <small><em><%= message.date.strftime("%d %B %Y %H:%M") %></em></small>
           </span>
           <span class="pull-right">
-            <%= link_to 'Edit', edit_message_path(message), :class => "btn btn-xs btn-default" %>
-            <%= link_to 'Delete', message_path(message),
+            <%= link_to 'Edit', edit_event_message_path(@event, message), :class => "btn btn-xs btn-default" %>
+            <%= link_to 'Delete', event_message_path(@event, message),
                         method: :delete,
                         data: { confirm: 'Are you sure?' }, :class => "btn btn-xs btn-danger" %>
           </span>

@@ -18,7 +18,6 @@ class PeopleController < ApplicationController
   end
 
   def index
-    @people = Person.all
   end
 
   def edit

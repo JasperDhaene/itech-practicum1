@@ -5,7 +5,7 @@
   <li class="active">People</li>
 </ol>
 
-<% if @people.size != 0 %>
+<% if People.all.any? %>
   <table class="table">
     <tr>
       <th>Name</th>
@@ -14,7 +14,7 @@
       <th>Actions</th>
     </tr>
 
-  <% @people.each do |person| %>
+  <% People.all.each do |person| %>
     <tr>
       <td><%= link_to person.name, person_path(person) %></td>
       <td><%= person.email %></td>

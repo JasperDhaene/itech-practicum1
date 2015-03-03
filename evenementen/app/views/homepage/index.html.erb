@@ -4,7 +4,7 @@
 
 <hr />
 <h2> Events </h2>
-<% if @events.size != 0 %>
+<% if Event.all.any? %>
 <table class="table" width="100%">
   <tr>
     <th>Title</th>
@@ -12,8 +12,7 @@
     <th>Startdate</th>
     <th>Enddate</th>
   </tr>
-
-  <% @events.each do |event| %>
+  <% Event.all.each do |event| %>
   <tr>
     <td><%= link_to event.title, event_path(event) %></td>
     <td><%= event.text %></td>
@@ -30,7 +29,7 @@
 <hr />
 
 <h2>People</h2>
-<% if @people.size != 0 %>
+<% if People.all.any? %>
   <table class="table">
     <tr>
       <th>Name</th>
@@ -38,7 +37,7 @@
       <th>Date of birth</th>
     </tr>
 
-  <% @people.each do |person| %>
+  <% People.all.each do |person| %>
     <tr>
       <td><%= link_to person.name, person_path(person) %></td>
       <td><%= person.email %></td>

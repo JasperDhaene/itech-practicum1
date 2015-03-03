@@ -2,31 +2,39 @@ class MessagesController < ApplicationController
 
   def create
     @event = Event.find(params[:event_id])
-    @message = @event.messages.create(params[:message].permit(:person_id, :text, :date, :event_id))
-    redirect_to event_path(@event)
+    if @event.messages.create(message_params)
+      redirect_to @event
+    else
+      render 'new'
+    end
   end
 
   def destroy
     @message = Message.find(params[:id])
     @event = @message.event
     @message.destroy
-    redirect_to event_path(@event)
+    redirect_to @event
   end
 
   def edit
     @message = Message.find(params[:id])
     @event = @message.event
-    @people = Person.all
   end
 
   def update
     @message = Message.find(params[:id])
+    @event = @message.event
 
-    if @message.update(params[:message].permit(:person_id, :text, :date, :event_id))
+    if @message.update(message_params)
       redirect_to @message.event
     else
       render 'edit'
     end
+  end
+
+  private
+  def message_params
+     params.require(:message).permit(:person_id, :text, :date, :event_id)
   end
 
 end

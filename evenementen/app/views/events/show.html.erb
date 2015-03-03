@@ -1,15 +1,15 @@
 <h1><%= @event.title %></h1>
 
 <ol class="breadcrumb">
-	<li>
-		<%= link_to 'Home', :root %>
-	</li>
-	<li>
-		<%= link_to 'Events', events_path %>
-	</li>
-	<li class="active">
-		<%= @event.title %>
-	</li>
+  <li>
+    <%= link_to 'Home', :root %>
+  </li>
+  <li>
+    <%= link_to 'Events', events_path %>
+  </li>
+  <li class="active">
+    <%= @event.title %>
+  </li>
 </ol>
 
 <div class="row">
@@ -48,7 +48,7 @@
       </div>
       <div class="panel-body">
         <div class="form-group">
-          <% if Person.all.size != 0 %>
+          <% if Person.all.any? %>
             <% if Person.all.size > @event.people.size %>
               <%= form_for :id, url: event_people_path(@event) do |f| %>
                 <%= f.select(:id) do %>
@@ -67,8 +67,8 @@
             <em><%= link_to 'Create a person', new_person_path %> to manage attendance</em>
           <% end %>
         </div>
-        <hr>
-        <% if @event.people.size != 0 %>
+        <hr />
+        <% if @event.people.any? %>
           <table class="table">
             <thead>
               <th>Person</th>
@@ -95,20 +95,30 @@
   </div>
 </div>
 
-<hr>
+<hr />
 <h2>Messages</h2>
 
-<% if @people.size != 0 %>
+<% if People.all.any? %>
 <%= render 'messages/messages' %>
 
 <p>
-	<strong>Post a new message</strong>
-	<%= form_for([@event, @event.messages.build]) do |f| %>
-	<%= render :partial => 'messages/form', :locals => {:f => f} %>
-	<% end %>
+  <strong>Post a new message</strong>
+  <% if @message.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <strong><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</strong>
+    <ul>
+    <% @message.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <%= form_for @message, url: event_messages_path(@event) do |f| %>
+  <%= render :partial => 'messages/form', :locals => {:f => f} %>
+  <% end %>
 </p>
 <% else %>
 <p>
-	<em><%= link_to 'Create a user', new_person_path %> to enable messages</em>
+  <em><%= link_to 'Create a user', new_person_path %> to post a message</em>
 </p>
 <% end %>

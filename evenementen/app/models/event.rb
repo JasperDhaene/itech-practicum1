@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+
   has_many :messages, dependent: :destroy
   has_and_belongs_to_many :people
 
@@ -6,4 +7,5 @@ class Event < ActiveRecord::Base
   validates :text, presence: true
   validates :startdate, presence: true
   validates :enddate, presence: true
+
 end

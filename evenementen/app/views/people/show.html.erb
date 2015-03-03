@@ -21,8 +21,8 @@
   <%= @person.birthdate.strftime("%d %B %Y") %>
 </p>
 
-<% if @person.messages.size != 0 %>
-<hr>
+<% if @person.messages.any? %>
+<hr />
 
 <ul class="list-group">
   <% @person.messages.each do |m| %>

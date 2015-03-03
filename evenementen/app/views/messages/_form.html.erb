@@ -1,13 +1,15 @@
 <div class="form-group">
   <%= f.label :person %><br />
-  <%= f.select(:person_id) do %>
-    <% @people.each do |p| -%>
-      <%= content_tag(:option, p.name, value: p.id) %>
+  <% if Person.all.any? %>
+    <%= f.select(:person_id) do %>
+      <% Person.all.each do |p| -%>
+        <%= content_tag(:option, p.name, value: p.id) %>
+      <% end %>
     <% end %>
   <% end %>
 </div>
 <div class="form-group">
-  <%= f.text_area :text, :require => "true", :class => "form-control", :placeholder => :text %>
+  <%= f.text_area :text, :require => "true", :class => "form-control", :placeholder => :text, :required => true %>
 </div>
 <div class="form-group">
   <%= f.label :date %><br />

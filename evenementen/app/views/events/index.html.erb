@@ -5,7 +5,7 @@
   <li class="active">Events</li>
 </ol>
 
-<% if @events.size != 0 %>
+<% if Event.all.any? %>
 <table class="table" width="100%">
   <tr>
     <th>Title</th>
@@ -15,7 +15,7 @@
     <th>Actions</th>
   </tr>
 
-  <% @events.each do |event| %>
+  <% Event.all.each do |event| %>
   <tr>
     <td><%= link_to event.title, event_path(event) %></td>
     <td><%= event.text %></td>
