@@ -2,14 +2,16 @@
   <%= f.label :person %><br />
   <% if Person.all.any? %>
     <%= f.select(:person_id) do %>
-      <% Person.all.each do |p| -%>
-        <%= content_tag(:option, p.name, value: p.id) %>
-      <% end %>
+      <%= options_for_select(Person.all.collect {|p| [ p.name, p.id ] }, @message.person_id) %>
     <% end %>
   <% end %>
 </div>
 <div class="form-group">
-  <%= f.text_area :text, :require => "true", :class => "form-control", :placeholder => :text, :required => true %>
+  <%= f.text_area :text,
+      :class => "form-control",
+      :placeholder => :text,
+      :required => true,
+      :rows => "5" %>
 </div>
 <div class="form-group">
   <%= f.label :date %><br />

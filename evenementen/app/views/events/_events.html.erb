@@ -1,0 +1,26 @@
+<% if Event.all.any? %>
+<table class="table" width="100%">
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Startdate</th>
+    <th>Enddate</th>
+    <th>Actions</th>
+  </tr>
+
+  <% Event.all.each do |event| %>
+  <tr>
+    <td><%= link_to truncate(event.title, length: 30), event_path(event) %></td>
+    <td><%= truncate(event.text, length: 80) %></td>
+    <td><%= event.startdate.strftime("%d %b %Y %H:%M") %></td>
+    <td><%= event.enddate.strftime("%d %b %Y %H:%M") %></td>
+    <td>
+      <%= link_to 'Edit', edit_event_path(event), :class => "btn btn-xs btn-default" %>
+      <%= link_to 'Delete', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-xs btn-danger" %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<% else%>
+  <div class="alert alert-warning" role="alert">There are no events at the moment.</div>
+<% end %>

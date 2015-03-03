@@ -1,6 +1,6 @@
 class Person < ActiveRecord::Base
 
-  has_many :messages, dependent: :destroy
+  has_many :messages, -> { order 'date desc' }, dependent: :destroy
   has_and_belongs_to_many :events
 
   validates :name, presence: true

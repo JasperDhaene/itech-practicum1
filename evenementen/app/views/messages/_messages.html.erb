@@ -15,9 +15,7 @@
           </span>
         </div>
         <div class="panel-body">
-          <p>
-            <%= message.text %>
-          </p>
+              <%= simple_format(message.text, {}, wrapper_tag: "div") %>
         </div>
       </div>
     </div>

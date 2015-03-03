@@ -5,31 +5,6 @@
   <li class="active">People</li>
 </ol>
 
-<% if Person.all.any? %>
-  <table class="table">
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Date of birth</th>
-      <th>Actions</th>
-    </tr>
-
-  <% Person.all.each do |person| %>
-    <tr>
-      <td><%= link_to person.name, person_path(person) %></td>
-      <td><%= person.email %></td>
-      <td><%= person.birthdate.strftime("%d %B %Y") %></td>
-      <td>
-        <%= link_to 'Edit', edit_person_path(person), :class => "btn btn-default" %>
-        <%= link_to 'Delete', person_path(person),
-                      method: :delete,
-                      data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
-      </td>
-    </tr>
-  <% end %>
-  </table>
-<% else %>
-  <div class="alert alert-warning">There are no entries at the moment.</div>
-<% end %>
+<%= render 'people' %>
 
 <%= link_to 'Create person', new_person_path, :class => "btn btn-success" %>

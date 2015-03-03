@@ -1,50 +1,12 @@
 <h1>Event management in Ruby on Rails</h1>
 
-<p>Welcome to the website that solves all your event management needs, brought to you by Jasper&amp;Florre NV.</p>
+<p>Welcome to the website that solves all your event management needs.</p>
 
 <hr />
-<h2> Events </h2>
-<% if Event.all.any? %>
-<table class="table" width="100%">
-  <tr>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Startdate</th>
-    <th>Enddate</th>
-  </tr>
-  <% Event.all.each do |event| %>
-  <tr>
-    <td><%= link_to event.title, event_path(event) %></td>
-    <td><%= event.text %></td>
-    <td><%= event.startdate.strftime("%d %b %Y %H:%M") %></td>
-    <td><%= event.enddate.strftime("%d %b %Y %H:%M") %></td>
-  </tr>
-  <% end %>
-</table>
-
-<% else%>
-  <div class="alert alert-warning" role="alert">There are no events at the moment.</div>
-<% end %>
+<h2><%= pluralize(Event.all.size, "Event") %></h2>
+<%= render 'events/events' %>
 
 <hr />
 
-<h2>People</h2>
-<% if Person.all.any? %>
-  <table class="table">
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Date of birth</th>
-    </tr>
-
-  <% Person.all.each do |person| %>
-    <tr>
-      <td><%= link_to person.name, person_path(person) %></td>
-      <td><%= person.email %></td>
-      <td><%= person.birthdate.strftime("%d %B %Y") %></td>
-    </tr>
-  <% end %>
-  </table>
-<% else %>
-  <div class="alert alert-warning">There are no registered users at the moment.</div>
-<% end %>
+<h2><%= pluralize(Person.all.size, "Person") %></h2>
+<%= render 'people/people' %>

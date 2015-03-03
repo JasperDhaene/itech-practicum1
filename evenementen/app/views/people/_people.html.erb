@@ -1,0 +1,26 @@
+<% if Person.all.any? %>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Date of birth</th>
+      <th>Actions</th>
+    </tr>
+
+  <% Person.all.each do |person| %>
+    <tr>
+      <td><%= link_to truncate(person.name, length: 50), person_path(person) %></td>
+      <td><%= truncate(person.email, length: 50) %></td>
+      <td><%= person.birthdate.strftime("%d %B %Y") %></td>
+      <td>
+        <%= link_to 'Edit', edit_person_path(person), :class => "btn btn-xs btn-default" %>
+        <%= link_to 'Delete', person_path(person),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' }, :class => "btn btn-xs btn-danger" %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  <div class="alert alert-warning">There are no entries at the moment.</div>
+<% end %>
