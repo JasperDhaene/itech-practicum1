@@ -103,16 +103,6 @@
 
 <p>
   <strong>Post a new message</strong>
-  <% if @message.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger">
-    <strong><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</strong>
-    <ul>
-    <% @message.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
   <%= form_for @message, url: event_messages_path(@event) do |f| %>
   <%= render :partial => 'messages/form', :locals => {:f => f} %>
   <% end %>
