@@ -1,0 +1,2 @@
+module EventPeopleHelper
+end

@@ -12,60 +12,88 @@
 	</li>
 </ol>
 
-<p>
-	<strong>Title:</strong>
-	<%= @event.title %>
-</p>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Event: <%= @event.title %>
+      </div>
+      <div class="panel-body">
+        <p>
+          <strong>Title:</strong>
+          <%= @event.title %>
+        </p>
 
-<p>
-	<strong>Text:</strong>
-	<%= @event.text %>
-</p>
+        <p>
+          <strong>Text:</strong>
+          <%= @event.text %>
+        </p>
 
-<p>
-	<strong>Startdate:</strong>
-	<%= @event.startdate.strftime("%d %B %Y %H:%M") %>
-</p>
-
-<p>
-	<strong>Enddate:</strong>
-	<%= @event.enddate.strftime("%d %B %Y %H:%M") %>
-</p>
-
-<hr>
-
-<!-- Note: 'people attending' is now based on the number of people in the DB, not the ones actually attending the event. This is a placeholder until proper relationships between
-	people and events are established. TODO
-	-->
-<h2>People attending</h2> 
-
-<% if @people.size != 0 %>
-<p>
-	<%= pluralize(@people.size, "person") %> attending this event.
-</p>
-<% else%>
-<p>
-	No people are attending this event
-</p>
-<% end%>
-
-<div class="form-group">
-<%= form_for(@event) do |f| %>
-	<%= f.label :person %>
-	<br />
-	<%= f.select(:person_id) do %>
-		<% @people.each do |p| -%>
-			<%= content_tag(:option, p.name, value: p.id) %>
-		<% end %>
-	<% end %>
+        <p>
+          <strong>Startdate:</strong>
+          <%= @event.startdate.strftime("%d %B %Y %H:%M") %>
+        </p>
+         
+        <p>
+          <strong>Enddate:</strong>
+          <%= @event.enddate.strftime("%d %B %Y %H:%M") %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        People attending
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <% if Person.all.size != 0 %>
+            <% if Person.all.size > @event.people.size %>
+              <%= form_for :id, url: event_people_path(@event) do |f| %>
+                <%= f.select(:id) do %>
+                  <% Person.all.each do |p| -%>
+                    <% unless @event.people.include?(p) %>
+                      <%= content_tag(:option, p.name, value: p.id) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                <%= f.submit 'Add', :class => "btn btn-xs btn-success" %>
+              <% end %>
+            <% else %>
+              <em>Everyone is attending this event</em>
+            <% end %>
+          <% else %>
+            <em><%= link_to 'Create a person', new_person_path %> to manage attendance</em>
+          <% end %>
+        </div>
+        <hr>
+        <% if @event.people.size != 0 %>
+          <table class="table">
+            <thead>
+              <th>Person</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <% @event.people.each do |p| %>
+              <tr>
+                <td class="td-fill">
+                  <%= p.name %>
+                </td>
+                <td>
+                  <%= link_to 'Delete', event_person_path(@event, :id => p.id), method: :delete, :class => "btn btn-xs btn-danger" %>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <em>There are no people attending yet</em>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-<div class="form-group">
-	<%= f.submit 'Save', :class => "btn btn-success" %>
-	<% end %>
-</div>
-
 
 <hr>
 <h2>Messages</h2>

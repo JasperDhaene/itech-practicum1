@@ -18,3 +18,11 @@
 body {
   padding-top: 70px;
 }
+
+td {
+  white-space:  nowrap;
+}
+
+.td-fill {
+  width:  100%;
+}
