@@ -29,7 +29,7 @@
 <hr />
 
 <h2>People</h2>
-<% if People.all.any? %>
+<% if Person.all.any? %>
   <table class="table">
     <tr>
       <th>Name</th>
@@ -37,7 +37,7 @@
       <th>Date of birth</th>
     </tr>
 
-  <% People.all.each do |person| %>
+  <% Person.all.each do |person| %>
     <tr>
       <td><%= link_to person.name, person_path(person) %></td>
       <td><%= person.email %></td>
