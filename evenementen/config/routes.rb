@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   end
 
   resources :people
-
+  
+  # TODO note: necessary for now to check the json version of the homepage. This can possibly removed later if we leave the JSON views to the machines.
+  get '/home' => 'homepage#index'
+  
   root 'homepage#index'
-
+  
+  
 end
