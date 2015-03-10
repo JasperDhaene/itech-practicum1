@@ -26,3 +26,65 @@ td {
 .td-fill {
   width:  100%;
 }
+
+/**
+ * Search bar
+ * 
+ * */
+
+.navbar-search .search-bar {
+  opacity: 0.7;
+
+  padding-left: 30px !important;
+}
+
+.navbar-search .search-bar:focus {
+  opacity: 1;
+  
+  -webkit-transition: all 0.15s ease-in 0s;
+  -moz-transition: all 0.15s ease-in 0s;
+  -o-transition: all 0.15s ease-in 0s;
+  transition: all 0.15s ease-in 0s;
+
+  width: 110%;
+}
+
+.navbar-search {
+    position: relative;
+}
+
+.navbar-search .icon-search {
+  position: absolute;
+  top: 7px;
+  left: 24px;
+
+  height: 100%;
+  vertical-align: middle;
+}
+
+.navbar-search .glyphicon-search {
+  line-height: 100%;
+}
+
+.navbar-search .search-menu {
+  width: 400px;
+}
+
+.navbar-search .search-menu .col-xs-1 {
+  vertical-align: middle;
+}
+
+.navbar-search .search-menu .search-item {
+  padding: 5px 10px;
+}
+
+.navbar-search .search-menu .search-item:not(:last-child) {
+  border-bottom: 1px solid #DDD;
+}
+
+.ellipsis {
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
