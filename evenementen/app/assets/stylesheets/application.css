@@ -27,6 +27,13 @@ td {
   width:  100%;
 }
 
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
 /**
  * Search bar
  * 
@@ -81,11 +88,4 @@ td {
 
 .navbar-search .search-menu .search-item:not(:last-child) {
   border-bottom: 1px solid #DDD;
-}
-
-.ellipsis {
-  width: 300px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }

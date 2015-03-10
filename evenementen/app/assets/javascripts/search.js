@@ -14,7 +14,8 @@ var template = '' +
 '                  <div class="col-xs-10">' +
 '                    <a href="{{link}}">' +
 '                      <strong>{{title}}</strong><br>' +
-'                      <small><span class="ellipsis">{{body}}</span></small>' +
+'                      <small><span class="ellipsis body-snippet">{{body_snip}}</span></small>' +
+'                      <span class="hidden body-hidden">{{body}}</span>' +
 '                    </a>' +
 '                  </div>' +
 '                </div>' +
@@ -33,7 +34,6 @@ $(document).ready(function(){
       };
   });
 
-
 /**
  * 
  * Fetch and parse JSON
@@ -43,12 +43,12 @@ $(document).ready(function(){
     $('.search-menu-item-result').remove();
     $.getJSON('/events.json', function(data){
       $.each(data.events, function(idx, event){
-        // TODO: ellipse text properly
         $('.navbar-search .search-menu').append(
                               template.replace('{{glyphicon}}', 'calendar')
                                       .replace('{{title}}', event.title)
                                       .replace('{{link}}', event.actions.show.href)
-                                      .replace('{{body}}', event.description.substr(0, 60) + '...'));
+                                      .replace('{{body_snip}}', event.description)
+                                      .replace('{{body}}', event.description));
       });
     });
     $.getJSON('/people.json', function(data){
@@ -57,18 +57,36 @@ $(document).ready(function(){
                               template.replace('{{glyphicon}}', 'user')
                                       .replace('{{title}}', person.name)
                                       .replace('{{link}}', person.actions.show.href)
+                                      .replace('{{body_snip}}', person.email)
                                       .replace('{{body}}', person.email));
       });
     });
   };
 
   $('.navbar-search .search-bar').on('input', function(){
+    $('.search-menu').show();
+    var query = $(this).val();
     $('.search-item').hide();
-    var els = $('.search-item-result:contains(' + $(this).val() + ')');
-    console.log(els.length);
-    if(els.length == 0){
-      $('.search-item-notfound').show();
-    } else $('.search-item-result:contains(' + $(this).val() + ')').show();
+    if(query.trim() == ''){
+      console.log('Empty');
+      $('.search-item-result').each(function(){
+        $(this).find('.body-snippet').html($(this).find('.body-hidden').html());
+      });
+      $('.search-item-result').show();
+    } else {
+      var els = $('.search-item-result:contains(' + query + ')');
+      if(els.length == 0){
+        $('.search-item-notfound').show();
+      } else $('.search-item-result:contains(' + query + ')').each(function(){
+        $(this).show();
+        var fullText = $(this).find('.body-hidden').html();
+        var startIdx = fullText.toLowerCase().indexOf(query.toLowerCase());
+        var text = (startIdx == 0 ? '' : '...') +  fullText.substr(Math.max(startIdx - 10, 0), (startIdx - 10 < 0 ? 0 : 10)) + 
+                            '<strong>' + fullText.substr(startIdx, query.length) + '</strong>' +
+                            fullText.substr(startIdx + query.length);
+        $(this).find('.body-snippet').html(text);
+      });
+    }
   });
 
   $('.navbar-search .search-bar').on('focus', function(){
