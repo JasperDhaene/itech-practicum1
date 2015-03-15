@@ -22,6 +22,12 @@ var template = '' +
 '                </div>' +
 '              </li>';
 
+// API endpoints
+var path = {
+  people: '/people',
+  events: '/events'
+};
+
 $(document).on('ready page:load', function(){
   /**
    * jQuery case-insensitive ':contains' selector
@@ -43,8 +49,9 @@ $(document).on('ready page:load', function(){
   var updateJSON = function(){
     // Clear previous JSON records
     $('.search-menu-item-result').remove();
+
     // Events -> template
-    $.getJSON('/events.json', function(data){
+    $.getJSON(path.events, function(data){
       $.each(data.events, function(idx, event){
         $('.navbar-search .search-menu').append(
                               template.replace('{{glyphicon}}', 'calendar')
@@ -55,7 +62,7 @@ $(document).on('ready page:load', function(){
       });
     });
     // People -> template
-    $.getJSON('/people.json', function(data){
+    $.getJSON(path.people, function(data){
       $.each(data.people, function(idx, person){
         $('.navbar-search .search-menu').append(
                               template.replace('{{glyphicon}}', 'user')
