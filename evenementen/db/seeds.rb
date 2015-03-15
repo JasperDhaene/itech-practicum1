@@ -8,8 +8,8 @@ Person.create!([
   {email: "walter.de.buck@gentsefeesten.be", name: "Walter De Buck", birthdate: "1934-07-13"},
   {email: "lolbroek@localhost", name: "Lolbroek", birthdate: "1994-04-01"},
   {email: "tonte.chow@gmail.com", name: "Tonte Chow", birthdate: "1980-05-16"},
-  {email: "jasper.dhaene@gmail.com", name: "Jasper D'haene", birthdate: "2015-02-11"},
-  {email: "florian@floriandejonckheere.be", name: "Florian Dejonckheere", birthdate: "2015-10-27"}
+  {email: "jasper.dhaene@gmail.com", name: "Jasper D'haene", birthdate: "1994-02-11"},
+  {email: "florian@floriandejonckheere.be", name: "Florian Dejonckheere", birthdate: "1994-10-27"}
 ])
 Event::HABTM_People.create!([
   {event_id: 2, person_id: 1},
