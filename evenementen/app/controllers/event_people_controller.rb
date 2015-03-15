@@ -1,8 +1,10 @@
 class EventPeopleController < ApplicationController
 
+  # POST /events/:event_id/people
+  # Parameters: event_id, person => { id }
   def create
     @event = Event.find(params[:event_id])
-    @person = Person.find(params[:id][:id])
+    @person = Person.find(params[:person][:id])
 
     # Avoid duplicates
     unless @event.people.include?(@person)
@@ -11,6 +13,7 @@ class EventPeopleController < ApplicationController
     redirect_to @event
   end
 
+  # DELETE /events/:event_id/people/:id
   def destroy
     @event = Event.find(params[:event_id])
     @person = Person.find(params[:id])

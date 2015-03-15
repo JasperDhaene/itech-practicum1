@@ -15,7 +15,7 @@
           </span>
         </div>
         <div class="panel-body">
-              <%= simple_format(message.text, {}, wrapper_tag: "div") %>
+              <%= nl2br(message.text).html_safe %>
         </div>
       </div>
     </div>

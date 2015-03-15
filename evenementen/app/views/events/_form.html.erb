@@ -1,25 +1,46 @@
 <%= form_for @event do |f| %>
+  <% if @event.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <strong><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</strong>
+    <ul>
+    <% @event.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
   <div class="form-group">
-    <%= f.text_field :title, :class => "form-control", :placeholder => :title, :required => "true" %>
+    <%= f.text_field :title,
+            :class => "form-control",
+            :placeholder => :title,
+            :required => "true" %>
   </div>
 
   <%= f.text_area :text,
-      :class => "form-control",
-      :placeholder => :text,
-      :required => true,
-      :rows => "10" %>
+          :class => "form-control",
+          :placeholder => :text,
+          :required => true,
+          :rows => "10" %>
 
   <div class="form-group">
-    <%= f.label :startdate %><br>
-    <%= f.datetime_select :startdate, start_year: 2015, end_year: 2065 %>
+    <%= f.label :startdate %>
+    <br>
+    <%= f.datetime_select :startdate,
+            start_year: Rails.application.config.start_year,
+            end_year: Rails.application.config.end_year %>
   </div>
 
   <div class="form-group">
-    <%= f.label :enddate %><br>
-    <%= f.datetime_select :enddate, start_year: 2015, end_year: 2065 %>
+    <%= f.label :enddate %>
+    <br>
+    <%= f.datetime_select :enddate,
+            start_year: Rails.application.config.start_year,
+            end_year: Rails.application.config.end_year %>
   </div>
 
   <div class="form-group">
-    <%= f.submit 'Create event', :class => "btn btn-success" %>
+    <%= f.submit 'Save',
+            :class => "btn btn-success" %>
   </div>
 <% end %>
