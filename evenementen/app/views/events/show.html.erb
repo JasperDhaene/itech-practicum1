@@ -26,7 +26,7 @@
 
         <p>
           <strong>Text:</strong>
-          <%= simple_format(@event.text, {}, wrapper_tag: "div") %>
+          <%= nl2br(@event.text).html_safe %>
         </p>
 
         <p>
@@ -50,7 +50,7 @@
         <div class="form-group">
           <% if Person.all.any? %>
             <% if Person.all.size > @event.people.size %>
-              <%= form_for :id, url: event_people_path(@event) do |f| %>
+              <%= form_for :person, url: event_people_path(@event) do |f| %>
                 <%= f.select(:id) do %>
                   <% Person.all.each do |p| -%>
                     <% unless @event.people.include?(p) %>
@@ -67,7 +67,7 @@
             <em><%= link_to 'Create a person', new_person_path %> to manage attendance</em>
           <% end %>
         </div>
-        <hr />
+        <hr>
         <% if @event.people.any? %>
           <table class="table">
             <thead>
@@ -99,7 +99,7 @@
   <%= link_to 'Edit', edit_event_path(@event), :class => "btn btn-default" %>
   <%= link_to 'Delete', event_path(@event), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></p>
 
-<hr />
+<hr>
 <h2>Messages</h2>
 
 <% if Person.all.any? %>

@@ -14,4 +14,9 @@ module ApplicationHelper
       end
   end
 
+  # http://stackoverflow.com/a/611618
+  def nl2br(s)
+    s.gsub(/\n/, '<br>')
+  end
+
 end
