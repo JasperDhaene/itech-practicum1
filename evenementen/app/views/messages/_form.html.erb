@@ -1,5 +1,7 @@
 <div class="form-group">
-  <%= f.label :person %><br />
+  <%= f.label :person %>
+  <br>
+  <!-- People that don't attend the event can place comments too -->
   <% if Person.all.any? %>
     <%= f.select(:person_id) do %>
       <%= options_for_select(Person.all.collect {|p| [ p.name, p.id ] }, @message.person_id) %>
@@ -8,15 +10,19 @@
 </div>
 <div class="form-group">
   <%= f.text_area :text,
-      :class => "form-control",
-      :placeholder => :text,
-      :required => true,
-      :rows => "5" %>
+        :class => "form-control",
+        :placeholder => :text,
+        :required => true,
+        :rows => "5" %>
 </div>
 <div class="form-group">
-  <%= f.label :date %><br />
-  <%= f.datetime_select :date, start_year: 1900, end_year: 2015 %>
+  <%= f.label :date %>
+  <br>
+  <%= f.datetime_select :date,
+          start_year: Rails.application.config.start_year,
+          end_year: Rails.application.config.end_year %>
 </div>
 <div class="form-group">
-  <%= f.submit 'Save', :class => "btn btn-success" %>
+  <%= f.submit 'Save',
+          :class => "btn btn-success" %>
 </div>

@@ -5,6 +5,39 @@
   <li class="active">Events</li>
 </ol>
 
-<%= render 'events' %>
+<% if Event.all.any? %>
+<table class="table" width="100%">
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Startdate</th>
+    <th>Enddate</th>
+    <th>Actions</th>
+  </tr>
+
+  <% Event.all.each do |event| %>
+  <tr>
+    <td>
+      <div class="ellipsis ellipsis-sm">
+        <%= link_to event.title, event_path(event) %>
+      </div>
+    </td>
+    <td>
+      <div class="ellipsis ellipsis-lg">
+        <%= event.text %>
+      </div>
+    </td>
+    <td><%= event.startdate.strftime("%d %b %Y %H:%M") %></td>
+    <td><%= event.enddate.strftime("%d %b %Y %H:%M") %></td>
+    <td>
+      <%= link_to 'Edit', edit_event_path(event), :class => "btn btn-xs btn-default" %>
+      <%= link_to 'Delete', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-xs btn-danger" %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+<% else%>
+  <div class="alert alert-warning" role="alert">There are no events at the moment.</div>
+<% end %>
 
 <%= link_to 'New event', new_event_path, :class => "btn btn-success" %>

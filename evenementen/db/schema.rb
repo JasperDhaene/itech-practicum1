@@ -18,20 +18,16 @@ ActiveRecord::Schema.define(version: 20150225182159) do
     t.text     "text"
     t.datetime "startdate"
     t.datetime "enddate"
-    t.integer  "person_id"
-    t.integer  "message_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "events", ["message_id"], name: "index_events_on_message_id"
-  add_index "events", ["person_id"], name: "index_events_on_person_id"
 
   create_table "events_people", id: false, force: :cascade do |t|
     t.integer "event_id"
     t.integer "person_id"
   end
 
+  add_index "events_people", ["event_id", "person_id"], name: "index_events_people_on_event_id_and_person_id", unique: true
   add_index "events_people", ["event_id"], name: "index_events_people_on_event_id"
   add_index "events_people", ["person_id"], name: "index_events_people_on_person_id"
 

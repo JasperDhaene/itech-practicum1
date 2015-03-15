@@ -23,5 +23,13 @@ module EventManager
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.quiet_assets = true
+
+    # Forms configuration
+    #
+    # Form year selection is limited to the current year +/- 50 years.
+    # This reflects only the year displayed in the view, not in the data itself.
+    #
+    config.start_year = Time.now.year - 50
+    config.end_year = Time.now.year + 50
   end
 end
